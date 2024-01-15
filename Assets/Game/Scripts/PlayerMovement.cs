@@ -12,7 +12,6 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _inputDetection = GetComponent<SwipeDetection>();
     }
 
     // Update is called once per frame
