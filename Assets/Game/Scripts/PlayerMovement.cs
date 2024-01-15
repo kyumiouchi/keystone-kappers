@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Game.Input;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -9,23 +7,23 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private Vector3 _leftFlip = new Vector3(-1, 1, 1);
     private bool _isGround;
+    [SerializeField] private SwipeDetection _inputDetection;
 
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _inputDetection = GetComponent<SwipeDetection>();
     }
 
     // Update is called once per frame
     private void FixedUpdate()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        
-        _rigidbody.velocity = new Vector2(horizontal * _speed, _rigidbody.velocity.y);
+        _rigidbody.velocity = _inputDetection.GetStartPosition() * _speed;
 
-        if (horizontal > 0.01f)
+        if (_inputDetection.GetStartPosition().x > 0.01f)
         {
             transform.localScale = _leftFlip;
-        } else if (horizontal < -0.01f)
+        } else if (_inputDetection.GetStartPosition().x < -0.01f)
         {
             transform.localScale = Vector3.one;
         }
