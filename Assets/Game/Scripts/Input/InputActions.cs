@@ -144,15 +144,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""PrimaryFingerPosition"",
-                    ""type"": ""Value"",
-                    ""id"": ""a328be2f-208e-4092-8b37-ce26f2359f79"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -175,17 +166,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Mobile"",
                     ""action"": ""PrimaryPosition"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""792a90a5-89bb-46e9-bbc2-25608a9b40f3"",
-                    ""path"": ""<Touchscreen>/primaryTouch/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PrimaryFingerPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -215,7 +195,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Touch = asset.FindActionMap("Touch", throwIfNotFound: true);
         m_Touch_PrimaryContact = m_Touch.FindAction("PrimaryContact", throwIfNotFound: true);
         m_Touch_PrimaryPosition = m_Touch.FindAction("PrimaryPosition", throwIfNotFound: true);
-        m_Touch_PrimaryFingerPosition = m_Touch.FindAction("PrimaryFingerPosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -371,14 +350,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private List<ITouchActions> m_TouchActionsCallbackInterfaces = new List<ITouchActions>();
     private readonly InputAction m_Touch_PrimaryContact;
     private readonly InputAction m_Touch_PrimaryPosition;
-    private readonly InputAction m_Touch_PrimaryFingerPosition;
     public struct TouchActions
     {
         private @InputActions m_Wrapper;
         public TouchActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @PrimaryContact => m_Wrapper.m_Touch_PrimaryContact;
         public InputAction @PrimaryPosition => m_Wrapper.m_Touch_PrimaryPosition;
-        public InputAction @PrimaryFingerPosition => m_Wrapper.m_Touch_PrimaryFingerPosition;
         public InputActionMap Get() { return m_Wrapper.m_Touch; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -394,9 +371,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @PrimaryPosition.started += instance.OnPrimaryPosition;
             @PrimaryPosition.performed += instance.OnPrimaryPosition;
             @PrimaryPosition.canceled += instance.OnPrimaryPosition;
-            @PrimaryFingerPosition.started += instance.OnPrimaryFingerPosition;
-            @PrimaryFingerPosition.performed += instance.OnPrimaryFingerPosition;
-            @PrimaryFingerPosition.canceled += instance.OnPrimaryFingerPosition;
         }
 
         private void UnregisterCallbacks(ITouchActions instance)
@@ -407,9 +381,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @PrimaryPosition.started -= instance.OnPrimaryPosition;
             @PrimaryPosition.performed -= instance.OnPrimaryPosition;
             @PrimaryPosition.canceled -= instance.OnPrimaryPosition;
-            @PrimaryFingerPosition.started -= instance.OnPrimaryFingerPosition;
-            @PrimaryFingerPosition.performed -= instance.OnPrimaryFingerPosition;
-            @PrimaryFingerPosition.canceled -= instance.OnPrimaryFingerPosition;
         }
 
         public void RemoveCallbacks(ITouchActions instance)
@@ -457,6 +428,5 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     {
         void OnPrimaryContact(InputAction.CallbackContext context);
         void OnPrimaryPosition(InputAction.CallbackContext context);
-        void OnPrimaryFingerPosition(InputAction.CallbackContext context);
     }
 }

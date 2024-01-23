@@ -67,27 +67,32 @@ namespace Game.Input
                 Debug.DrawLine(_startPosition, _endPosition, Color.red, 5f);
                 Vector3 direction = _endPosition - _startPosition;
                 Vector2 direction2D = new Vector2(direction.x, direction.y).normalized;
-                SwipeDetection2D(direction2D);
+                SwipeLeftRightDetection2D(direction2D.x);
+                SwipeUpDownDetection2D(direction.y);
             }
         }
 
-        private void SwipeDetection2D(Vector2 direction)
+        private void SwipeLeftRightDetection2D(float direction)
         {
-            if (Vector2.Dot(Vector2.up, direction) > _directionThreshold)
-            {
-                StartMovement(Vector2.up);
-            }
-            else if (Vector2.Dot(Vector2.down, direction) > _directionThreshold)
-            {
-                StartMovement(Vector2.down);
-            }
-            else if (Vector2.Dot(Vector2.left, direction) > _directionThreshold)
+            if (direction * -1 > _directionThreshold)
             {
                 StartMovement(Vector2.left);
             }
-            else if (Vector2.Dot(Vector2.right, direction) > _directionThreshold)
+            else if (direction > _directionThreshold)
             {
                 StartMovement(Vector2.right);
+            }
+        }
+
+        private void SwipeUpDownDetection2D(float direction)
+        {
+            if (direction * -1 > _directionThreshold)
+            {
+                StartMovement(Vector2.down);
+            }
+            else if (direction > _directionThreshold)
+            {
+                StartMovement(Vector2.up);
             }
         }
 

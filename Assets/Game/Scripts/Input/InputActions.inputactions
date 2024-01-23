@@ -122,15 +122,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "PrimaryFingerPosition",
-                    "type": "Value",
-                    "id": "a328be2f-208e-4092-8b37-ce26f2359f79",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -153,17 +144,6 @@
                     "processors": "",
                     "groups": "Mobile",
                     "action": "PrimaryPosition",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "792a90a5-89bb-46e9-bbc2-25608a9b40f3",
-                    "path": "<Touchscreen>/primaryTouch/position",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "PrimaryFingerPosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

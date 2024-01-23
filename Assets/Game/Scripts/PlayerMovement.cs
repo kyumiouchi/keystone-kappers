@@ -14,11 +14,15 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     private void FixedUpdate()
     {
-        _rigidbody.velocity = _inputDetection.GetStartPosition() * _speed;
+        PlayerMove();
 
+        ChangeFlip();
+    }
+
+    private void ChangeFlip()
+    {
         if (_inputDetection.GetStartPosition().x > 0.01f)
         {
             transform.localScale = _leftFlip;
@@ -26,16 +30,34 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.localScale = Vector3.one;
         }
+    }
+
+    private void PlayerMove()
+    {
+        if (_inputDetection.GetStartPosition() == Vector2.left
+            // || _inputDetection.GetStartPosition() == Vector2.right
+            )
+        {
+            _rigidbody.velocity = new Vector2(-_speed, _rigidbody.velocity.y);//_inputDetection.GetStartPosition() * _speed;
+        } 
+        else if (_inputDetection.GetStartPosition() == Vector2.right  && _isGround)
+        {
+            _rigidbody.velocity = new Vector2(_speed, _rigidbody.velocity.y);
+        } 
         
-        if (Input.GetKeyDown(KeyCode.Space)  && _isGround)
+        if (_inputDetection.GetStartPosition() == Vector2.up  && _isGround)
         {
             Jump();
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
+        } 
+        else if (_inputDetection.GetStartPosition() == Vector2.down && _isGround)
         {
-            
+            Squat();
         }
+    }
+
+    private void Squat()
+    {
+        Debug.Log("Squat");
     }
 
     private void Jump()
