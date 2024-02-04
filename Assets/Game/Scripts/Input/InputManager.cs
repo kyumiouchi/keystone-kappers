@@ -1,4 +1,5 @@
 using System.Collections;
+using Game.Utils;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -65,7 +66,7 @@ namespace Game.Input
 
         public Vector2 PrimaryPosition()
         {
-            return Utils.ScreenToWorld(_mainCamera, _inputActions.Touch.PrimaryPosition.ReadValue<Vector2>());
+            return CameraPosition.ScreenToWorld(_mainCamera, _inputActions.Touch.PrimaryPosition.ReadValue<Vector2>());
         }
     }
 }
